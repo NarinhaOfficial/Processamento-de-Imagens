@@ -10,46 +10,29 @@ contraste = 1.5
 
 while True:
     chave = cv2.waitKey(1)
-    if chave == ord('a'):
-        for altura in range (original.shape[0]):
-            for largura in range (original.shape[1]):
-                for canais in range (original.shape[2]):
-                    modificar[altura, largura, canais] = min(255, modificar[altura, largura, canais]+brilho)
-        #cv2.imshow('a - modificar brilho', modificar)
-    elif chave == ord('z'):
-        for altura in range(modificar.shape[0]):
-            for largura in range(modificar.shape[1]):
-                for canais in range(modificar.shape[2]):
-                    modificar[altura, largura, canais] = max(0, modificar[altura, largura, canais]-brilho)
-        #cv2.imshow('z - Diminuir brilho', modificar)
-    elif chave == ord('s'):
-        for a in range(modificar.shape[0]):
-            for l in range(modificar.shape[1]):
-                for c in range(modificar.shape[2]):
+    
+    for a in range (original.shape[0]):
+        for l in range (original.shape[1]):
+            for c in range (original.shape[2]):
+                if chave == ord('a'):
+                    modificar[a, l, c] = min(255, modificar[a, l, c]+brilho)
+                elif chave == ord('z'):
+                    modificar[a, l, c] = max(0, modificar[a, l, c]-brilho)
+                elif chave == ord('s'):
                     modificar[a, l, c] = min(255, modificar[a,l,c] * contraste)
-    elif chave == ord('x'):
-        for a in range(modificar.shape[0]):
-            for l in range(modificar.shape[1]):
-                for c in range(modificar.shape[2]):
+                elif chave == ord('x'):
                     modificar[a, l, c] = max(0, modificar[a,l,c] / contraste)
-
-    elif chave == ord('n'):
-        for a in range(modificar.shape[0]):
-            for l in range(modificar.shape[1]):
-                for c in range(modificar.shape[2]):
+                elif chave == ord('n'):
                     modificar[a, l, c] = 255 - modificar[a, l, c]
-    elif chave == ord('m'):
-        for a in range(modificar.shape[0]):
-            for l in range(modificar.shape[1]):
-                for c in range(modificar.shape[2]):
+                elif chave == ord('m'):
                     modificar[a, l, c] = original [a,l,c]
-         
+                     
     cv2.imshow('a - Aumentar o brilho | z - Diminuir brilho | s - Aumentar o contraste | x - Diminuir o contraste | n - Aplicar negativo | m - Reverter todas as alterações', modificar)
     cv2.imshow('Original', original)
     
     
     if chave == ord('q'):
-            break
+        break
 
 
 cv2.waitKey(0)
