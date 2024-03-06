@@ -4,7 +4,7 @@ import numpy as np
 original = cv2.imread('C:/Users/narin/OneDrive/Documentos/Programas/processamento de imagens/1 - Atividade/color_red.jpg')
 
 #Para pegar as dimensões de altura e largura
-(altura, largura) = original.shape[:2]
+altura, largura = original.shape[:2]
 
 a = int(altura/2)
 l = int(largura/2)
