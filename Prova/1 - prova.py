@@ -23,6 +23,9 @@ lvideo = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
 avideo = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
 limg = int(lvideo*0.2)
 aimg = int(limg/original.shape[1]) * original.shape[0]
+
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+local = cv2.VideoWriter('Prova', fourcc, 30.0, (lvideo, avideo))
 while True:
     ret, frame = video.read()
     if not ret:
@@ -37,6 +40,8 @@ while True:
 
     frame[avideo - aimg - 10:avideo- 10, 10: limg + 10][mascara != 0] = \
     logo[:, :, :3] [mascara != 0]
+
+    local.write(frame)
     chave = cv2.waitKey(1)
     
     cv2.imshow('Video com a logo', frame)
